@@ -1,114 +1,152 @@
 import SwiftUI
 
 struct MedicamentoAgrupadoCard: View {
-    // Recebe UMA LISTA de remédios (ex: as 3 doses de Dipirona do dia)
     let medicamentos: [Medicamento]
+    let todasAsDoses: [Medicamento]
     
-    // Feedback tátil
+    @State private var showingEditSheet = false
     let haptic = UIImpactFeedbackGenerator(style: .medium)
     
+    var diasRestantes: String {
+        guard let ultimaDoseGeral = todasAsDoses.max(by: { $0.horario < $1.horario })?.horario,
+              let primeiraDose = todasAsDoses.first else { return "" }
+        
+        if primeiraDose.duracaoDias == 0 { return "Uso Contínuo" }
+        
+        let calendario = Calendar.current
+        let hoje = calendario.startOfDay(for: Date())
+        let final = calendario.startOfDay(for: ultimaDoseGeral)
+        
+        let componentes = calendario.dateComponents([.day], from: hoje, to: final)
+        
+        if let dias = componentes.day {
+            if dias < 0 { return "Finalizado" }
+            if dias == 0 { return "Último dia" }
+            return "Faltam \(dias) dias"
+        }
+        return ""
+    }
+    
     var body: some View {
-        // Pega o primeiro da lista só para ler Nome e Dosagem (são iguais em todos)
         if let principal = medicamentos.first {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 10) {
                 
-                // 1. CABEÇALHO (Nome e Dosagem)
-                HStack {
+                // 1. CABEÇALHO 
+                HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(principal.nome)
-                            .font(.headline)
+                            .font(.headline.bold())
                             .foregroundColor(Theme.textPrimary)
+                            .lineLimit(1)
                         
                         Text(principal.dosagem)
                             .font(.caption)
                             .foregroundColor(Theme.textSecondary)
+                        
+                        if !diasRestantes.isEmpty {
+                            Text(diasRestantes)
+                                .font(.system(size: 10, weight: .bold))
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 3)
+                                .background((diasRestantes == "Uso Contínuo" ? Color.blue : Color.orange).opacity(0.15))
+                                .foregroundColor(diasRestantes == "Uso Contínuo" ? .blue : .orange)
+                                .cornerRadius(6)
+                                .padding(.top, 2)
+                        }
                     }
+                    
                     Spacer()
-                    // Ícone do remédio
-                    Image(systemName: "pills.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(Theme.primary.opacity(0.3))
+                    
+                    // Pílula 3D Menor
+                    Image(systemName: "pills.fill")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color(hex: "6FEFB6"), Color(hex: "B88AE6"))
+                        .font(.system(size: 32)) // Reduzi tamanho (era 42)
+                        .rotationEffect(.degrees(-10))
+                        .shadow(color: Color.black.opacity(0.1), radius: 3, x: 1, y: 1)
+                        .padding(.leading, 8)
                 }
                 
-                // 2. LINHA DO TEMPO (Os Bloquinhos)
+                Divider().overlay(Theme.textSecondary.opacity(0.2))
+                
+                // 2. LISTA DE HORÁRIOS
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
-                        // Ordena por horário para mostrar na ordem certa (Manhã -> Noite)
+                    HStack(spacing: 8) { // Menos espaço entre os botões
                         ForEach(medicamentos.sorted(by: { $0.horario < $1.horario })) { dose in
-                            Button(action: { marcarDose(dose) }) {
-                                BloquinhoHorario(dose: dose)
-                            }
-                            .disabled(dose.estaConcluido) // Impede desmarcar sem querer (opcional)
+                            ChipHorario(dose: dose) { marcarDose(dose) }
                         }
+                    }
+                    .padding(.vertical, 2)
+                }
+                
+                // 3. BOTÃO EDITAR DESTACADO
+                HStack {
+                    Spacer()
+                    Button(action: { showingEditSheet = true }) {
+                        Text("Editar Tratamento")
+                            .font(.caption.bold())
+                            .foregroundColor(Theme.primary) // Texto Roxo
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(Theme.primary.opacity(0.15)) // Fundo Roxo clarinho
+                            .clipShape(Capsule()) // Formato arredondado
                     }
                 }
             }
-            .padding()
-            .background(Theme.cardBackground)
-            .cornerRadius(16)
-            .shadow(color: Theme.shadow, radius: 5, x: 0, y: 2)
+            .padding(14)
+            .background(Theme.groupedCardBackground)
+            .cornerRadius(18)
+            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+            .sheet(isPresented: $showingEditSheet) {
+                EditarMedicamentoView(medicamento: principal)
+            }
         }
     }
     
     func marcarDose(_ dose: Medicamento) {
         haptic.impactOccurred()
-        withAnimation(.spring()) {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
             dose.estaConcluido.toggle()
         }
     }
 }
 
-// SUBCOMPONENTE: O Design do Bloquinho
-struct BloquinhoHorario: View {
+// CHIP HORÁRIO
+struct ChipHorario: View {
     let dose: Medicamento
-    
-    // Verifica se esse é o PRÓXIMO horário a ser tomado (Destaque)
-    var ehOProximo: Bool {
-        return !dose.estaConcluido && dose.horario > Date().addingTimeInterval(-3600) // Considera "próximo" o que não passou de 1h atrás
-    }
+    var action: () -> Void
+    var estaAtrasado: Bool { dose.horario < Date() && !dose.estaConcluido }
     
     var body: some View {
-        if dose.estaConcluido {
-            // ESTADO 1: CONCLUÍDO (Discreto, só um check)
-            HStack(spacing: 4) {
-                Image(systemName: "checkmark")
-                    .font(.caption2.bold())
-                Text(dose.horario, style: .time)
-                    .font(.caption2)
-                    .strikethrough()
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 6)
-            .background(Theme.success.opacity(0.1))
-            .foregroundColor(Theme.success)
-            .cornerRadius(8)
-            
-        } else {
-            // ESTADO 2: PENDENTE
-            VStack(spacing: 2) {
-                Text(dose.horario, style: .time)
-                    .font(ehOProximo ? .body.bold() : .caption) // Próximo fica MAIOR
-                
-                if ehOProximo {
-                    Text("AGORA")
-                        .font(.system(size: 8, weight: .bold))
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 2)
-                        .background(Color.white.opacity(0.3))
-                        .cornerRadius(4)
+        Button(action: action) {
+            HStack(spacing: 6) {
+                ZStack {
+                    if dose.estaConcluido {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 16)) // Ícone menor
+                            .foregroundColor(.white)
+                    } else {
+                        Circle()
+                            .stroke(estaAtrasado ? Color.red : Theme.primary.opacity(0.5), lineWidth: 1.5)
+                            .frame(width: 14, height: 14) // Círculo menor
+                    }
                 }
+                
+                Text(dose.horario, style: .time)
+                    .font(.system(size: 13, weight: .semibold, design: .rounded)) // Fonte menor
+                    .foregroundColor(dose.estaConcluido ? .white : Theme.textPrimary)
+                    .strikethrough(dose.estaConcluido)
             }
-            .padding(.horizontal, ehOProximo ? 16 : 10)
-            .padding(.vertical, ehOProximo ? 10 : 8)
-            // Se for o próximo: Fundo Roxo Cheio. Se for futuro: Borda Roxa.
-            .background(ehOProximo ? Theme.primary : Theme.background)
-            .foregroundColor(ehOProximo ? .white : Theme.primary)
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Theme.primary, lineWidth: ehOProximo ? 0 : 1)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(
+                Group {
+                    if dose.estaConcluido { Theme.success }
+                    else if estaAtrasado { Color.red.opacity(0.15) }
+                    else { Color(UIColor.tertiarySystemFill) }
+                }
             )
-            .scaleEffect(ehOProximo ? 1.05 : 1.0) // Leve zoom no próximo
+            .cornerRadius(10)
         }
     }
 }

@@ -1,0 +1,17 @@
+.DS_Store
+
+# Xcode user-specific
+xcuserdata/
+*.xcuserstate
+*.xcbkptlist
+
+# Build artifacts
+DerivedData/
+build/
+
+# SwiftPM
+.build/
+*.swiftpm/
+
+# CocoaPods (se usar)
+Pods/

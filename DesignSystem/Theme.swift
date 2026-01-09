@@ -1,18 +1,29 @@
 import SwiftUI
 
 struct Theme {
-    // Paleta de Cores
-    static let primary = Color(hex: "6C5CE7") // Roxo
-    static let background = Color(hex: "F4F6F8")
-    static let cardBackground = Color.white
-    static let textPrimary = Color(hex: "2D3436")
-    static let textSecondary = Color.gray
-    static let success = Color(hex: "00B894") // Verde
+    // 1. Cores da Marca
+    static let primary = Color(hex: "6C5CE7")
+    static let success = Color(hex: "00B894")
     
+    // 2. Cores Adaptativas (Dark Mode Ready 🌙)
+    
+    // Fundo da Tela
+    static let background = Color(UIColor.systemGroupedBackground)
+    
+    // Cards Padrão (Branco no Light / Cinza no Dark)
+    static let cardBackground = Color(UIColor.secondarySystemGroupedBackground)
+    
+    // --- NOVO: Fundo do Card Agrupado (O do seus remédios) ---
+    static let groupedCardBackground = Color(UIColor.systemGray6)
+    
+    // Textos
+    static let textPrimary = Color.primary
+    static let textSecondary = Color.secondary
+    
+    // Sombra (Sutil e só aparece onde faz sentido)
     static let shadow = Color.black.opacity(0.1)
 }
 
-// Extensão para ler cores HEX
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)

@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "nome": "Dipirona (Novalgina)",
+    "sintomas": ["dor de cabeça", "febre", "corpo", "gripe", "dengue", "novalgina", "lisador"],
+    "dosagem": "500mg ou 1g",
+    "intervalo": 6,
+    "minimo_horas": 4,
+    "duracao_dias": 3
+  },
+  {
+    "id": 2,
+    "nome": "Ibuprofeno (Advil)",
+    "sintomas": ["inflamação", "garganta", "muscular", "cólicas", "dente", "advil", "alivium"],
+    "dosagem": "400mg ou 600mg",
+    "intervalo": 8,
+    "minimo_horas": 6,
+    "duracao_dias": 5
+  },
+  {
+    "id": 3,
+    "nome": "Paracetamol (Tylenol)",
+    "sintomas": ["dor leve", "febre", "gripe", "resfriado", "tylenol"],
+    "dosagem": "750mg",
+    "intervalo": 6,
+    "minimo_horas": 4,
+    "duracao_dias": 3
+  },
+  {
+    "id": 4,
+    "nome": "Dorflex",
+    "sintomas": ["dor muscular", "tensão", "relaxante", "costas", "lombar", "orfenadrina"],
+    "dosagem": "1 comprimido",
+    "intervalo": 12,
+    "minimo_horas": 8,
+    "duracao_dias": 5
+  },
+  {
+    "id": 5,
+    "nome": "Buscopan Composto",
+    "sintomas": ["cólica abdominal", "gases", "barriga", "estômago", "menstrual"],
+    "dosagem": "1 comprimido",
+    "intervalo": 8,
+    "minimo_horas": 6,
+    "duracao_dias": 3
+  },
+  {
+    "id": 6,
+    "nome": "Amoxicilina",
+    "sintomas": ["antibiótico", "infecção", "garganta", "ouvido", "sinusite", "bacteriana"],
+    "dosagem": "500mg ou 875mg",
+    "intervalo": 8,
+    "minimo_horas": 8,
+    "duracao_dias": 7
+  },
+  {
+    "id": 7,
+    "nome": "Azitromicina",
+    "sintomas": ["antibiótico", "infecção respiratória", "garganta", "pulmão", "astro"],
+    "dosagem": "500mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 5
+  },
+  {
+    "id": 8,
+    "nome": "Loratadina",
+    "sintomas": ["alergia", "rinite", "coceira", "espirro", "nariz", "claritin"],
+    "dosagem": "10mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 5
+  },
+  {
+    "id": 9,
+    "nome": "Omeprazol",
+    "sintomas": ["gastrite", "queimação", "refluxo", "estômago", "jejum", "peptil"],
+    "dosagem": "20mg ou 40mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 14
+  },
+  {
+    "id": 10,
+    "nome": "Simeticona (Luftal)",
+    "sintomas": ["gases", "estufamento", "barriga inchada", "desconforto", "luftal"],
+    "dosagem": "1 comp ou gotas",
+    "intervalo": 6,
+    "minimo_horas": 4,
+    "duracao_dias": 3
+  },
+  {
+    "id": 11,
+    "nome": "Nimesulida",
+    "sintomas": ["inflamação forte", "dor de dente", "garganta", "articulação", "nisulid"],
+    "dosagem": "100mg",
+    "intervalo": 12,
+    "minimo_horas": 12,
+    "duracao_dias": 5
+  },
+  {
+    "id": 12,
+    "nome": "Dramin B6",
+    "sintomas": ["enjoo", "náusea", "vômito", "viagem", "tontura", "gravidez"],
+    "dosagem": "1 comprimido",
+    "intervalo": 8,
+    "minimo_horas": 6,
+    "duracao_dias": 2
+  },
+  {
+    "id": 13,
+    "nome": "Benegrip",
+    "sintomas": ["gripe", "coriza", "febre", "nariz entupido", "resfriado"],
+    "dosagem": "1 comprimido",
+    "intervalo": 8,
+    "minimo_horas": 6,
+    "duracao_dias": 5
+  },
+  {
+    "id": 14,
+    "nome": "Losartana Potássica",
+    "sintomas": ["pressão alta", "hipertensão", "coração", "uso contínuo", "aradois"],
+    "dosagem": "50mg",
+    "intervalo": 12,
+    "minimo_horas": 12,
+    "duracao_dias": 0
+  },
+  {
+    "id": 15,
+    "nome": "Metformina (Glifage)",
+    "sintomas": ["diabetes", "açúcar", "glicose", "uso contínuo", "glifage"],
+    "dosagem": "500mg ou 850mg",
+    "intervalo": 12,
+    "minimo_horas": 8,
+    "duracao_dias": 0
+  },
+  {
+    "id": 16,
+    "nome": "Sinvastatina",
+    "sintomas": ["colesterol", "gordura", "coração", "uso contínuo"],
+    "dosagem": "20mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 0
+  },
+  {
+    "id": 17,
+    "nome": "Clonazepam (Rivotril)",
+    "sintomas": ["ansiedade", "dormir", "calmante", "tarja preta", "pânico"],
+    "dosagem": "0.25mg ou gotas",
+    "intervalo": 12,
+    "minimo_horas": 8,
+    "duracao_dias": 0
+  },
+  {
+    "id": 18,
+    "nome": "Neosaldina",
+    "sintomas": ["dor de cabeça forte", "enxaqueca", "neosa"],
+    "dosagem": "1 drágea",
+    "intervalo": 6,
+    "minimo_horas": 4,
+    "duracao_dias": 3
+  },
+  {
+    "id": 19,
+    "nome": "Torsilax",
+    "sintomas": ["dor muscular forte", "coluna", "relaxante", "cafeína", "tandrilax"],
+    "dosagem": "1 comprimido",
+    "intervalo": 12,
+    "minimo_horas": 8,
+    "duracao_dias": 5
+  },
+  {
+    "id": 20,
+    "nome": "Vitamina C",
+    "sintomas": ["imunidade", "resfriado", "suplemento", "vitamina", "targifor"],
+    "dosagem": "1g Efervescente",
+    "intervalo": 24,
+    "minimo_horas": 20,
+    "duracao_dias": 30
+  },
+  {
+    "id": 21,
+    "nome": "Melatonina",
+    "sintomas": ["sono", "dormir", "insônia", "hormônio"],
+    "dosagem": "0.21mg ou 3mg",
+    "intervalo": 24,
+    "minimo_horas": 20,
+    "duracao_dias": 0
+  },
+  {
+    "id": 22,
+    "nome": "Pantoprazol",
+    "sintomas": ["gastrite", "proteção estômago", "úlcera", "pantozol"],
+    "dosagem": "40mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 14
+  },
+  {
+    "id": 23,
+    "nome": "Aspirina (AAS)",
+    "sintomas": ["coração", "sangue", "dor", "infarto", "afinamento"],
+    "dosagem": "100mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 0
+  },
+  {
+    "id": 24,
+    "nome": "Prednisona",
+    "sintomas": ["inflamação", "corticoide", "alergia forte", "tosse", "asma"],
+    "dosagem": "20mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 5
+  },
+  {
+    "id": 25,
+    "nome": "Cefalexina (Keflex)",
+    "sintomas": ["antibiótico", "infecção pele", "urina", "keflex"],
+    "dosagem": "500mg",
+    "intervalo": 6,
+    "minimo_horas": 6,
+    "duracao_dias": 7
+  },
+  {
+    "id": 26,
+    "nome": "Levotiroxina (Puran T4)",
+    "sintomas": ["tireoide", "hormônio", "metabolismo", "uso contínuo", "puran"],
+    "dosagem": "MCG (variável)",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 0
+  },
+  {
+    "id": 27,
+    "nome": "Escitalopram",
+    "sintomas": ["ansiedade", "depressão", "humor", "uso contínuo", "lexapro"],
+    "dosagem": "10mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 0
+  },
+  {
+    "id": 28,
+    "nome": "Albendazol",
+    "sintomas": ["verme", "parasita", "lombriga"],
+    "dosagem": "400mg",
+    "intervalo": 24,
+    "minimo_horas": 24,
+    "duracao_dias": 1
+  }
+]
