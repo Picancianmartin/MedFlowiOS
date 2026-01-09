@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTracker - App iOS</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f2f2f7; /* Fundo do sistema iOS */
+            color: #1c1c1e;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #6C5CE7; /* Roxo do seu App */
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .phone-frame {
+            background: #000;
+            padding: 12px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 4px solid #333;
+            width: 300px; /* Largura aproximada de um iPhone */
+        }
+
+        video {
+            width: 100%;
+            border-radius: 28px;
+            display: block;
+        }
+
+        .features {
+            text-align: left;
+            max-width: 350px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-left: 5px solid #6C5CE7;
+        }
+
+        .feature-item h3 { margin: 0 0 5px 0; color: #6C5CE7; }
+        .feature-item p { margin: 0; color: #555; font-size: 0.95rem; }
+
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            background: #6C5CE7;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>MediTracker</h1>
+        <p class="subtitle">Controle inteligente de medicação feito com SwiftUI & SwiftData</p>
+
+        <div class="showcase">
+            <div class="phone-frame">
+                <video autoplay loop muted playsinline>
+                    <source src="demo.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+            </div>
+
+            <div class="features">
+                <div class="feature-item">
+                    <h3>💊 Bula Inteligente</h3>
+                    <p>Busca automática de dosagens e contraindicações baseada em JSON local.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>🔔 Notificações Locais</h3>
+                    <p>Agendamento inteligente de lembretes calculados a partir da prescrição médica.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h3>💾 SwiftData</h3>
+                    <p>Persistência de dados nativa e segura com suporte a relacionamentos complexos.</p>
+                </div>
+
+                <a href="https://github.com/Picancianmartin/MediTracker" class="btn">Ver Código no GitHub</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
