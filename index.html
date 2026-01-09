@@ -3,125 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediTracker - App iOS</title>
+    <title>MediTracker - Controle Inteligente</title>
     <style>
+        :root {
+            --primary: #6C5CE7;
+            --bg-color: #050507;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f2f2f7; /* Fundo do sistema iOS */
-            color: #1c1c1e;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            overflow-x: hidden; /* Evita rolagem lateral */
+            line-height: 1.5;
+        }
+
+        /* Efeito de fundo (Glow) */
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.2) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
-            text-align: center;
-            max-width: 800px;
-            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        h1 {
-            color: #6C5CE7; /* Roxo do seu App */
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        p.subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 40px;
-        }
-
-        .showcase {
+        /* NAVBAR */
+        nav {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-github {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-github:hover {
+            background: white;
+            color: black;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
         }
 
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+            display: block; /* Quebra linha */
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.6);
+        }
+
+        /* PHONE MOCKUP */
+        .phone-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite; /* Animação Flutuante */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
         .phone-frame {
-            background: #000;
-            padding: 12px;
+            border: 8px solid #1f1f1f;
             border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border: 4px solid #333;
-            width: 300px; /* Largura aproximada de um iPhone */
+            overflow: hidden;
+            width: 300px;
+            height: auto;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8);
+            background: black;
+            position: relative;
+            z-index: 2;
         }
 
         video {
             width: 100%;
-            border-radius: 28px;
+            height: 100%;
             display: block;
+            object-fit: cover;
         }
 
-        .features {
-            text-align: left;
-            max-width: 350px;
+        /* BENTO GRID FEATURES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 100px;
+            margin-bottom: 100px;
         }
 
-        .feature-item {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 24px;
+            transition: background 0.3s;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-icon {
+            font-size: 2rem;
             margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-left: 5px solid #6C5CE7;
-        }
-
-        .feature-item h3 { margin: 0 0 5px 0; color: #6C5CE7; }
-        .feature-item p { margin: 0; color: #555; font-size: 0.95rem; }
-
-        .btn {
             display: inline-block;
-            margin-top: 30px;
-            background: #6C5CE7;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
-            transition: transform 0.2s;
+            background: rgba(108, 92, 231, 0.2);
+            padding: 10px;
+            border-radius: 12px;
+            color: var(--primary);
         }
-        .btn:hover { transform: translateY(-2px); }
 
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVO (Celular) */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr; /* Um em cima do outro */
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-text p {
+                margin: 0 auto 30px auto;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr; /* Cards um embaixo do outro */
+            }
+
+            .phone-wrapper {
+                margin-bottom: 40px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>MediTracker</h1>
-        <p class="subtitle">Controle inteligente de medicação feito com SwiftUI & SwiftData</p>
+    <div class="glow-bg"></div>
 
-        <div class="showcase">
-            <div class="phone-frame">
-                <video autoplay loop muted playsinline>
-                    <source src="demo.mp4" type="video/mp4">
-                    Seu navegador não suporta vídeos.
-                </video>
+    <div class="container">
+        <nav>
+            <div class="logo">MedFlowiOS</div>
+            <a href="https://www.github.com/Picancianmartin" class="btn-github">GitHub Profile</a>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-text">
+                <h1>Sua saúde, <br><span>organizada.</span></h1>
+                <p>O jeito mais inteligente de gerenciar medicações. Desenvolvido com tecnologia de ponta em SwiftUI e SwiftData para garantir que você nunca perca uma dose.</p>
+                <a href="https://github.com/Picancianmartin/MedFlowiOS.git" class="cta-button">Ver Código Fonte</a>
             </div>
 
-            <div class="features">
-                <div class="feature-item">
-                    <h3>💊 Bula Inteligente</h3>
-                    <p>Busca automática de dosagens e contraindicações baseada em JSON local.</p>
+            <div class="phone-wrapper">
+                <div class="phone-frame">
+                    <video autoplay loop muted playsinline>
+                        <source src="/MediTracker/Assets.xcassets/AppIcon.appiconset/video.mp4" type="video/mp4">
+                    </video>
                 </div>
-                
-                <div class="feature-item">
-                    <h3>🔔 Notificações Locais</h3>
-                    <p>Agendamento inteligente de lembretes calculados a partir da prescrição médica.</p>
-                </div>
+            </div>
+        </div>
 
-                <div class="feature-item">
-                    <h3>💾 SwiftData</h3>
-                    <p>Persistência de dados nativa e segura com suporte a relacionamentos complexos.</p>
-                </div>
-
-                <a href="https://github.com/Picancianmartin/MediTracker" class="btn">Ver Código no GitHub</a>
+        <div class="features-grid">
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>Bula Inteligente</h3>
+                <p>Sistema que lê arquivos JSON locais para sugerir dosagens, intervalos e contraindicações automaticamente.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💾</div>
+                <h3>SwiftData Core</h3>
+                <p>Persistência de dados ultra-rápida, segura e offline-first. Seu histórico fica salvo no dispositivo.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>Design Moderno</h3>
+                <p>Interface adaptativa (Dark/Light mode) criada com os componentes mais recentes do SwiftUI.</p>
             </div>
         </div>
     </div>
