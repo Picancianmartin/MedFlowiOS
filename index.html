@@ -243,9 +243,14 @@
 
             <div class="phone-wrapper">
                 <div class="phone-frame">
-                    <video autoplay loop muted playsinline>
-                        <source src="/demo-medflow-web.mp4" type="video/mp4">
-                    </video>
+                    <video
+  className="w-full h-full object-cover rounded-2xl" // Suas classes de estilo
+  src="/demo-medflow-web.mp4" // Verifique o caminho (leia o item 2)
+  autoPlay
+  loop
+  muted        // OBRIGATÓRIO para autoplay funcionar
+  playsInline  // OBRIGATÓRIO para funcionar no iPhone/Mac
+>
                 </div>
             </div>
         </div>
