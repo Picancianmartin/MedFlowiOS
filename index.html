@@ -241,17 +241,17 @@
                 <a href="https://github.com/Picancianmartin/MedFlowiOS.git" class="cta-button">Ver Código Fonte</a>
             </div>
 
-            <div class="phone-wrapper">
-                <div class="phone-frame">
-                    <video
-  className="w-full h-full object-cover rounded-2xl" // Suas classes de estilo
-  src="/demo-medflow-web.mp4" // Verifique o caminho (leia o item 2)
-  autoPlay
-  loop
-  muted        // OBRIGATÓRIO para autoplay funcionar
-  playsInline  // OBRIGATÓRIO para funcionar no iPhone/Mac
->
-                </div>
+            <div class="phone-frame">
+                <video 
+                    autoplay 
+                    loop 
+                    muted 
+                    playsinline
+                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 32px;"
+                >
+                    <source src="./demo-medflow-web.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
             </div>
         </div>
 
